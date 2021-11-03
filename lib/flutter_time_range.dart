@@ -21,6 +21,12 @@ class TimeRangePicker extends StatefulWidget {
   /// Initial value for second minutes
   final int? initialToMinutes;
 
+  /// Step value for minutes
+  final int stepMinutes;
+
+  /// Max value for minutes
+  final int maxMinutes;
+
   /// Callback which called when select button clicked / tapped
   final onSelectCallback? onSelect;
 
@@ -124,6 +130,8 @@ class TimeRangePicker extends StatefulWidget {
       @required this.initialToHour,
       @required this.initialFromMinutes,
       @required this.initialToMinutes,
+      this.stepMinutes = 1,
+      this.maxMinutes = 59,
       this.onSelect,
       this.onCancel,
       this.tabFromText = "From",
@@ -420,7 +428,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                           },
                                           child: NumberPicker(
                                               minValue: 0,
-                                              maxValue: 59,
+                                              maxValue: widget.maxMinutes,
+                                              step: widget.stepMinutes,
                                               value: _menitFrom,
                                               zeroPad: true,
                                               textStyle:
@@ -581,7 +590,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                           },
                                           child: NumberPicker(
                                               minValue: 0,
-                                              maxValue: 59,
+                                              maxValue: widget.maxMinutes,
+                                              step: widget.stepMinutes,
                                               value: _menitTo,
                                               zeroPad: true,
                                               textStyle:
