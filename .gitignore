@@ -9,8 +9,6 @@
 .history
 .svn/
 
-pubspec.lock
-
 # IntelliJ related
 *.iml
 *.ipr
@@ -74,5 +72,3 @@ build/
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
-
-*.lock
