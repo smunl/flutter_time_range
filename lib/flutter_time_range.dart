@@ -188,6 +188,15 @@ class _TimeRangePickerState extends State<TimeRangePicker>
   int _selectedTab = 0;
   int _maxJamValue = 23;
   int _minJamValue = 0;
+  int _minFromHourValue = 0;
+  int _maxFromHourValue = 0;
+  int _minFromMinuteValue = 0;
+  int _maxFromMinuteValue = 0;
+  int _minToHourValue = 0;
+  int _maxToHourValue = 0;
+  int _minToMinuteValue = 0;
+  int _maxToMinuteValue = 0;
+
   BoxDecoration defaultDecoration = BoxDecoration(
       borderRadius: BorderRadius.circular(7),
       border: Border.all(color: Colors.grey[500]!));
@@ -206,6 +215,11 @@ class _TimeRangePickerState extends State<TimeRangePicker>
         _selectedTab = _tabController.index;
       });
     });
+
+    _minFromHourValue = widget.minHour.hour;
+    _maxToHourValue = widget.maxHour.hour;
+    _minFromMinuteValue = widget.minHour.minute;
+    _maxToMinuteValue = widget.maxHour.minute;
 
     _jamFrom = widget.is24Format
         ? widget.initialFromHour!
@@ -371,8 +385,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                             }
                                           },
                                           child: NumberPicker(
-                                              minValue: widget.minHour.hour,
-                                              maxValue: widget.maxHour.hour,
+                                              minValue: _minFromHourValue,
+                                              maxValue: _maxFromHourValue,
                                               value: _jamFrom,
                                               zeroPad: true,
                                               textStyle:
@@ -383,6 +397,11 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                               onChanged: (value) {
                                                 setState(() {
                                                   _jamFrom = value;
+                                                  _minFromMinuteValue = value ==
+                                                          _minFromHourValue
+                                                      ? widget.minHour.minute
+                                                      : 45;
+                                                  _minToHourValue = value;
                                                 });
                                               }),
                                         ),
@@ -435,8 +454,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                             }
                                           },
                                           child: NumberPicker(
-                                              minValue: 0,
-                                              maxValue: widget.maxHour.minute,
+                                              minValue: _minFromMinuteValue,
+                                              maxValue: _maxFromMinuteValue,
                                               step: widget.stepMinutes,
                                               value: _menitFrom,
                                               zeroPad: true,
@@ -533,8 +552,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                             }
                                           },
                                           child: NumberPicker(
-                                              minValue: widget.minHour.hour,
-                                              maxValue: widget.maxHour.hour,
+                                              minValue: _minToHourValue,
+                                              maxValue: _maxToHourValue,
                                               value: _jamTo,
                                               zeroPad: true,
                                               textStyle:
@@ -597,8 +616,8 @@ class _TimeRangePickerState extends State<TimeRangePicker>
                                             }
                                           },
                                           child: NumberPicker(
-                                              minValue: 0,
-                                              maxValue: widget.maxHour.minute,
+                                              minValue: _minToMinuteValue,
+                                              maxValue: _maxToMinuteValue,
                                               step: widget.stepMinutes,
                                               value: _menitTo,
                                               zeroPad: true,
